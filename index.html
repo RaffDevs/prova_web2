@@ -12,27 +12,55 @@
         <div class="card">
             <h2>Blastoise</h2>
             <img src="blastoise.webp" class="character">
-            <div class="health-bar" :style="{width: hero.life + '%'}">{{ hero.life }}</div>
+            <div class="health-bar" :style="{width: hero.life + '%'}">
+                <p v-if="hero.life < 0">
+                    Dead
+                </p>
+                <p v-else>
+                    {{hero.life}}
+                </p>
+            </div>
             <div class="actions">
                 <button @click="atacar(true)">Atacar</button>
                 <button @click="defender(true)">Defender</button>
-                <button @click="usarPocao(true)">Usar Poção</button>
+                <button :disabled="potionAmount < 1" @click="usarPocao(true)">
+                    Usar Poção <span class="badge">{{ potionAmount }}</span>
+                </button>
                 <button @click="correr(true)">Correr</button>
             </div>
         </div>
         <div class="card">
             <h2>Charizard</h2>
             <img src="charizard.png" class="character">
-            <div class="health-bar" :style="{width: enemy.life + '%'}">{{ enemy.life }}</div>
+            <div class="health-bar" :style="{width: enemy.life + '%'}">
+                <p v-if="enemy.life < 0">
+                    Dead
+                </p>
+                <p v-else>
+                    {{enemy.life}}
+                </p>
+            </div>
             <div class="actions">
                 <button disabled @click="atacar(false)">Atacar</button>
                 <button disabled @click="defender(false)">Defender</button>
-                <button disabled @click="usarPocao(false)">Usar Poção</button>
-                <button disabled @click="correr(false)">Correr</button>
+                <button disabled @click="usarPocao(false)">
+                    Usar Poção <span class="badge">{{ enemyPotionAmount }}</span>
+                </button>
             </div>
         </div>
     </div>
     
+    <div class="log-box">
+        <h3>Log</h3>
+        <ul style=" max-width: 200px;">
+            <li v-for="log in battleLog" :key="log">{{ log }}</li>
+        </ul>
+    </div>
+
+    <div class="winner-box" v-if="isGameOver">
+        <h2 v-if="winner">{{ winner }} venceu!</h2>
+        <button @click="reiniciarJogo">Reiniciar Jogo</button>
+    </div>
 </div>
 
 <script src="index.js"></script>

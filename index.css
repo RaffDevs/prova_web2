@@ -15,7 +15,6 @@ body, html {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
 }
 
 .card {
@@ -57,4 +56,41 @@ body, html {
 .character {
     width: 300px;
     height: 300px;
+}
+
+.badge {
+    background-color: #ff5555;
+    color: white;
+    padding: 5px 10px 5px 10px;
+    border-radius: 100%;
+}
+
+.log-box {
+    background-color: #44475a;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 50px;
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
+.log-box h3 {
+    margin-top: 0;
+}
+
+.log-box ul {
+    padding-left: 20px;
+}
+
+.winner-box {
+    background-color: #44475a;
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.winner-box h2 {
+    margin-top: 0;
 }
