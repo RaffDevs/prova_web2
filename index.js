@@ -1,37 +1,83 @@
-const { createApp } = Vue
+const { createApp } = Vue;
 
 createApp({
-    data() {
-        return {
-            hero: {life: 100},
-            enemy: {life: 100},
-            damage: 0,
+  data() {
+    return {
+      hero: { life: 100, defenseMultiplier: 1 },
+      enemy: { life: 100, defenseMultiplier: 1 },
+      damage: 0,
+      battleLog: [],
+      potionAmount: 3,
+      winner: null
+    };
+  },
+  methods: {
+    atacar(isHero) {
+      if (isHero) {
+        this.damage = Math.round(Math.random() * 20);
+        this.battleLog.push('Herói ataca e causa ' + this.damage + ' de dano ao vilão!');
+        
+        if (this.enemy.life > 0) {
+          this.enemy.life -= this.damage;
+          if (this.enemy.life <= 0) {
+            this.winner = 'Herói';
+            this.battleLog.push('O vilão foi derrotado! Você venceu!');
+          } else {
+            this.acaoVilao();
+          }
+        } else {
+          this.battleLog.push('O vilão já foi derrotado!');
         }
+      } else {
+        this.damage = Math.round(Math.random() * 20);
+        this.battleLog.push('Vilão ataca e causa ' + this.damage + ' de dano ao herói!');
+        
+        if (this.hero.life > 0) {
+          this.hero.life -= this.damage * this.hero.defenseMultiplier;
+          if (this.hero.life <= 0) {
+            this.winner = 'Vilão';
+            this.battleLog.push('O herói foi derrotado! Você perdeu!');
+          }
+        } else {
+          this.battleLog.push('O herói já foi derrotado!');
+        }
+      }
     },
-    methods: {
-        atacar(isHeroi) {
-            var damage = Math.round(Math.random() * 100)
-            console.log(damage);
-            if (isHeroi) {
-                this.acaoVilao();
-            } else {
-                console.log("Vilão atacou")
-                //this.acaoVilao();
-            }
-        },
-        defender() {
-
-        },
-        usarPocao() {
-
-        },
-        correr() {
-
-        },
-        acaoVilao() {
-            const acoes = ['atacar', 'defender', 'usarPocao', 'correr'];
-            const acaoAleatoria = acoes[Math.floor(Math.random() * acoes.length)];
-            this[acaoAleatoria](false);
-        },
-    }
-}).mount("#app")
+    acaoVilao() {
+      const actions = ['atacar', 'defender', 'usarPocao'];
+      const randomAction = actions[Math.floor(Math.random() * actions.length)];
+      console.log("Ação vilão", randomAction);
+      this[randomAction](false);
+    },
+    defender() {
+      this.hero.defenseMultiplier = 0.5;
+      this.battleLog.push('Herói defende!');
+    },
+    usarPocao(isHero) {
+      if (this.potionAmount > 0) {
+        if (isHero) {
+          this.potionAmount--;
+          this.hero.life += 50;
+          this.hero.life = Math.min(100, this.hero.life);
+          this.battleLog.push('Herói usa uma poção, curando 50 pontos!');
+        } else {
+          this.potionAmount--;
+          this.enemy.life += 50;
+          this.enemy.life = Math.min(100, this.enemy.life);
+          this.battleLog.push('Vilão usa uma poção, curando 50 pontos!');
+        }
+      } else {
+        this.battleLog.push('Herói/Vilão está sem poções!');
+      }
+    },
+    correr() {
+      this.battleLog.push('Herói foge!');
+      this.winner = 'Vilão';
+    },
+  },
+  computed: {
+    isGameOver() {
+      return this.hero.life <= 0 || this.enemy.life <= 0 || this.winner;
+    },
+  },
+}).mount("#app");
