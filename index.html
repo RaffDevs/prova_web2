@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prova - Herói e Vilão</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+<div id="app">
+    <div class="container">
+        <div class="card">
+            <h2>Blastoise</h2>
+            <img src="blastoise.webp" class="character">
+            <div class="health-bar" :style="{width: hero.life + '%'}">{{ hero.life }}</div>
+            <div class="actions">
+                <button @click="atacar(true)">Atacar</button>
+                <button @click="defender(true)">Defender</button>
+                <button @click="usarPocao(true)">Usar Poção</button>
+                <button @click="correr(true)">Correr</button>
+            </div>
+        </div>
+        <div class="card">
+            <h2>Charizard</h2>
+            <img src="charizard.png" class="character">
+            <div class="health-bar" :style="{width: hero.life + '%'}">{{ enemy.life }}</div>
+            <div class="actions">
+                <button @click="atacar(true)">Atacar</button>
+                <button @click="defender(true)">Defender</button>
+                <button @click="usarPocao(true)">Usar Poção</button>
+                <button @click="correr(true)">Correr</button>
+            </div>
+        </div>
+    </div>
+    
+</div>
+</body>
+</html>
+
+<script src="index.js"></script>
+
+

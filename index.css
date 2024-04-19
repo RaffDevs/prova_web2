@@ -1,0 +1,118 @@
+/* 
+
+#app {
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+}
+
+.personagem {
+    background-color: #a6c1e5;
+    border: 2px solid #1a355e;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 10px;
+    width: 200px;
+}
+
+.acoes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+button {
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    background-color: #73295c;
+    color: whitesmoke;
+    cursor: pointer;
+    transition: background-color 0.5s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #3d0525;
+    transform: translateY(-3px);
+}
+
+button:active {
+    transform: translateY(0px);
+}
+
+.barra-vida {
+    height: 32px;
+    background-color: #4CAF50;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border-radius: 5px;
+    margin-bottom: 16px;
+}
+
+.sprite {
+    height: 160px;
+    background-color: #ddd;
+} */
+
+
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #282a36;
+    color: #f8f8f2;
+    font-family: Arial, sans-serif;
+}
+
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.card {
+    background-color: #44475a;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 0 10px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.health-bar {
+    background-color: #ff5555;
+    height: 20px;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+}
+
+.actions button {
+    background-color: #bd93f9;
+    color: #282a36;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.actions button:hover {
+    background-color: #6272a4;
+}
+
+.character {
+    width: 300px;
+    height: 300px;
+}
